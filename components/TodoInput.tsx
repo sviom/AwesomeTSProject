@@ -23,11 +23,16 @@ const styles = StyleSheet.create({
 	},
 });
 
+var ss = new Object();
+
 const TodoInput: React.FC<{ title: string }> = ({ title }) => {
 	const isDarkMode = useColorScheme() === 'dark';
 	[2345, 3, 3, 3, 3, 3, 3].forEach((x) => {
 		console.log('ddd');
 	});
+
+    var dd = new Object();
+
 	return (
 		<View style={styles.sectionContainer}>
 			<Text
