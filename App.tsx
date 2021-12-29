@@ -92,8 +92,8 @@ const App = () => {
 
 					<TodoItem title="ddd">dfdfd</TodoItem>
 					<Section title="Step One">
-						Edit <Text style={styles.highlight}>App.tsx</Text> to change this screen and then come back to see your
-						edits.
+						Edit <Text style={styles.highlight}>App.tsx</Text> to change this screen and then come back to
+						see your edits.
 					</Section>
 					<Section title="See Your Changes">
 						<ReloadInstructions />
