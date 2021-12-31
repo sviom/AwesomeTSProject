@@ -19,7 +19,8 @@ import {
 	ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import SampleData from './sample_data/sample_todo_list.json';
-import TodoItem from './components/TodoItem';
+// import TodoItem from './components/TodoItem';
+import { TodoItem, TodoCardView } from './components';
 
 const Section: React.FC<{
 	title: string;
@@ -59,7 +60,7 @@ const App = () => {
 	const isDarkMode = useColorScheme() === 'dark';
 
 	const backgroundStyle = {
-		backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+		// backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
 	};
 
 	const todoItemList = []; //  new Array<typeof TodoItem>();
@@ -68,15 +69,10 @@ const App = () => {
 	for (const iterator of dataList) {
 		todoItemList.push(<TodoItem title={iterator.title}>{iterator.content}</TodoItem>);
 	}
-	[2, 3, 4, 5, 6, 7].forEach((x) => {
-		console.log('ddd');
-	});
-
-	// const renderItem = ({item}) => <Item title={item.title} />;
 
 	return (
-		<SafeAreaView style={backgroundStyle}>
-			<StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+		<SafeAreaView style={[styles.container, backgroundStyle]}>
+			{/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
 			<ScrollView contentInsetAdjustmentBehavior="automatic" style={backgroundStyle}>
 				{/* <Header /> */}
 				<Text
@@ -89,15 +85,16 @@ const App = () => {
 					]}>
 					This is Todo list
 				</Text>
-				<View
+				<TodoCardView />
+
+				{/* <View
 					style={{
 						backgroundColor: isDarkMode ? Colors.black : Colors.white,
 					}}>
 					{todoItemList}
 
-					{/* <FlatList data={SampleData.todo_list} renderItem={renderItem} /> */}
+					<FlatList data={SampleData.todo_list} renderItem={renderItem} />
 
-					<TodoItem title="ddd">dfdfd</TodoItem>
 					<Section title="Step One">
 						Edit <Text style={styles.highlight}>App.tsx</Text> to change this screen and then come back to
 						see your edits.
@@ -110,13 +107,17 @@ const App = () => {
 					</Section>
 					<Section title="Learn More">Read the docs to discover what to do next:</Section>
 					<LearnMoreLinks />
-				</View>
+				</View> */}
 			</ScrollView>
 		</SafeAreaView>
 	);
 };
 
 const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: '#3143e8',
+	},
 	appTitle: {
 		color: '#fff',
 		fontSize: 36,
