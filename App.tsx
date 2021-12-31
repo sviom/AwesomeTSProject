@@ -63,13 +63,6 @@ const App = () => {
 		// backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
 	};
 
-	const todoItemList = []; //  new Array<typeof TodoItem>();
-	let dataList = [];
-	dataList = SampleData.todo_list;
-	for (const iterator of dataList) {
-		todoItemList.push(<TodoItem title={iterator.title}>{iterator.content}</TodoItem>);
-	}
-
 	return (
 		<SafeAreaView style={[styles.container, backgroundStyle]}>
 			<Text

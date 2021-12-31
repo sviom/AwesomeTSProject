@@ -1,59 +1,46 @@
 import React from 'react';
 
-import { StyleSheet, Text, useColorScheme, View } from 'react-native';
+import { StyleSheet, Text, useColorScheme, View, TouchableOpacity } from 'react-native';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-const styles = StyleSheet.create({
-	sectionContainer: {
-		marginTop: 32,
-		paddingHorizontal: 24,
-	},
-	sectionTitle: {
-		fontSize: 24,
-		fontWeight: '600',
-	},
-	sectionDescription: {
-		marginTop: 8,
-		fontSize: 18,
-		fontWeight: '400',
-	},
-	highlight: {
-		fontWeight: '700',
-	},
-});
-
-const TodoItem: React.FC<{ title: string }> = ({ children, title }) => {
+const TodoItem: React.FC = () => {
 	const isDarkMode = useColorScheme() === 'dark';
-
-	[2, 3, 4, 5, 6].forEach((element) => {
-		console.log(element);
-	});
-
 	return (
-		<View style={styles.sectionContainer}>
-			<Text
-				style={[
-					styles.sectionTitle,
-					{
-						color: isDarkMode ? Colors.white : Colors.black,
-					},
-				]}
-			>
-				{title}
-			</Text>
-			<Text
-				style={[
-					styles.sectionDescription,
-					{
-						color: isDarkMode ? Colors.light : Colors.dark,
-					},
-				]}
-			>
-				{children}
-			</Text>
+		<View style={styles.container}>
+			<TouchableOpacity>
+				<View style={styles.circle} />
+			</TouchableOpacity>
+			<Text style={styles.text}>TodoList items will be shown here</Text>
 		</View>
 	);
 };
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		borderBottomColor: '#bbb',
+		borderBottomWidth: StyleSheet.hairlineWidth,
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+	},
+	text: {
+		flex: 5,
+		fontWeight: '500',
+		fontSize: 18,
+		marginVertical: 20,
+		width: 100,
+	},
+	circle: {
+		width: 30,
+		height: 30,
+		borderRadius: 15,
+		borderColor: 'blue',
+		borderWidth: 2,
+		marginRight: 20,
+		marginLeft: 20,
+	},
+});
 
 export default TodoItem;
