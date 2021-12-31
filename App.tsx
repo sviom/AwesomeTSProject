@@ -33,8 +33,7 @@ const Section: React.FC<{
 					{
 						color: isDarkMode ? Colors.white : Colors.black,
 					},
-				]}
-			>
+				]}>
 				{title}
 			</Text>
 			<Text
@@ -43,8 +42,7 @@ const Section: React.FC<{
 					{
 						color: isDarkMode ? Colors.light : Colors.dark,
 					},
-				]}
-			>
+				]}>
 				{children}
 			</Text>
 		</View>
@@ -88,15 +86,13 @@ const App = () => {
 							backgroundColor: isDarkMode ? Colors.black : Colors.white,
 							color: isDarkMode ? Colors.white : Colors.black,
 						},
-					]}
-				>
+					]}>
 					This is Todo list
 				</Text>
 				<View
 					style={{
 						backgroundColor: isDarkMode ? Colors.black : Colors.white,
-					}}
-				>
+					}}>
 					{todoItemList}
 
 					{/* <FlatList data={SampleData.todo_list} renderItem={renderItem} /> */}

@@ -4,5 +4,7 @@ module.exports = {
     semi: true,
     useTabs: true,
     printWidth: 120,
-    tabWidth: 4
+    tabWidth: 4,
+    bracketSameLine: true,
+    vueIndentScriptAndStyle: true
 }
