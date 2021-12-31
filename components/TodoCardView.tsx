@@ -12,23 +12,17 @@ const styles = StyleSheet.create({
 		marginLeft: 10,
 		marginRight: 10,
 	},
-	input: {
-		padding: 20,
-		borderBottomColor: '#bbb',
-		borderBottomWidth: 1,
-		fontSize: 24,
-		marginLeft: 20,
-	},
 });
 
 const TodoItem: React.FC = () => {
 	const isDarkMode = useColorScheme() === 'dark';
 	return (
 		<View style={styles.card}>
-			<TextInput style={styles.input} placeholder="Add an item!" />
-            <ScrollView>
-                <Text>To do list </Text>
-            </ScrollView>
+			{/* <TextInput style={styles.input} placeholder="Add an item!" /> */}
+			<TodoInput />
+			<ScrollView>
+				<Text>To do list </Text>
+			</ScrollView>
 		</View>
 	);
 };
