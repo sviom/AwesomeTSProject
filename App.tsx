@@ -80,7 +80,18 @@ const App = () => {
 		<SafeAreaView style={backgroundStyle}>
 			<StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
 			<ScrollView contentInsetAdjustmentBehavior="automatic" style={backgroundStyle}>
-				<Header />
+				{/* <Header /> */}
+				<Text
+					style={[
+						styles.appTitle,
+						{
+							backgroundColor: isDarkMode ? Colors.black : Colors.white,
+							color: isDarkMode ? Colors.white : Colors.black,
+						},
+					]}
+				>
+					This is Todo list
+				</Text>
 				<View
 					style={{
 						backgroundColor: isDarkMode ? Colors.black : Colors.white,
@@ -110,6 +121,15 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
+	appTitle: {
+		color: '#fff',
+		fontSize: 36,
+		marginTop: 30,
+		marginBottom: 30,
+		fontWeight: '300',
+		textAlign: 'center',
+		backgroundColor: '#3143e8',
+	},
 	sectionContainer: {
 		marginTop: 32,
 		paddingHorizontal: 24,
