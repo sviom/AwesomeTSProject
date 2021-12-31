@@ -72,22 +72,23 @@ const App = () => {
 
 	return (
 		<SafeAreaView style={[styles.container, backgroundStyle]}>
-			{/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
-			<ScrollView contentInsetAdjustmentBehavior="automatic" style={backgroundStyle}>
-				{/* <Header /> */}
-				<Text
-					style={[
-						styles.appTitle,
-						{
-							backgroundColor: isDarkMode ? Colors.black : Colors.white,
-							color: isDarkMode ? Colors.white : Colors.black,
-						},
-					]}>
-					This is Todo list
-				</Text>
-				<TodoCardView />
+			<Text
+				style={[
+					styles.appTitle,
+					{
+						backgroundColor: isDarkMode ? Colors.black : Colors.white,
+						color: isDarkMode ? Colors.white : Colors.black,
+					},
+				]}>
+				This is Todo list
+			</Text>
+			<TodoCardView />
 
-				{/* <View
+			{/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
+			{/* <ScrollView contentInsetAdjustmentBehavior="automatic" style={backgroundStyle}>
+				<Header />
+
+				<View
 					style={{
 						backgroundColor: isDarkMode ? Colors.black : Colors.white,
 					}}>
@@ -107,8 +108,8 @@ const App = () => {
 					</Section>
 					<Section title="Learn More">Read the docs to discover what to do next:</Section>
 					<LearnMoreLinks />
-				</View> */}
-			</ScrollView>
+				</View>
+			</ScrollView> */}
 		</SafeAreaView>
 	);
 };
