@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, useColorScheme, View, TextInput } from 'react-native';
+import { StyleSheet, Text, useColorScheme, View, TextInput, ScrollView } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { TodoInput } from '.';
 
 const styles = StyleSheet.create({
 	card: {
@@ -25,6 +26,9 @@ const TodoItem: React.FC = () => {
 	return (
 		<View style={styles.card}>
 			<TextInput style={styles.input} placeholder="Add an item!" />
+            <ScrollView>
+                <Text>To do list </Text>
+            </ScrollView>
 		</View>
 	);
 };
