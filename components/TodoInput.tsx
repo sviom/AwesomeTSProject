@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, useColorScheme, View, TextInput, Button } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { TodoItemModel } from "../models"
 
 const styles = StyleSheet.create({
 	inputContainer: {
@@ -36,6 +37,14 @@ const TodoInput: React.FC = () => {
 			</View>
 		</View>
 	);
+};
+
+const addTodo = (text: string) => {
+	const [todoItem, setTodo] = useState<TodoItemModel>();
+
+	let tempItem = new TodoItemModel(text);
+
+	setTodo(tempItem);
 };
 
 export default TodoInput;
