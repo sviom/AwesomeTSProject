@@ -22,7 +22,9 @@ const TodoItem: React.FC = () => {
 	const addTodo = (text: string) => {
 		let tempItem = new TodoItemModel(text);
 		todoItemList?.push(tempItem);
-		setTodo(todoItemList);
+
+		let newArray = [...todoItemList, tempItem];
+		setTodo(newArray);
 	};
 
 	return (
