@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, useColorScheme, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, useColorScheme, View, TextInput, Button, Keyboard } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { TodoItemModel } from "../models"
+import { TodoItemModel } from '../models';
 
 const styles = StyleSheet.create({
 	inputContainer: {
@@ -22,8 +22,20 @@ const styles = StyleSheet.create({
 	},
 });
 
-const TodoInput: React.FC = () => {
+type todoProps = {
+	onClick: (text: string) => void;
+};
+
+const TodoInput: React.FC<todoProps> = ({ children, onClick }) => {
 	const isDarkMode = useColorScheme() === 'dark';
+	const buttonClick = () => {
+		console.log('button click : ', inputText);
+		onClick(inputText); // todolist 에 저장
+		setText(''); // 초기화
+		Keyboard.dismiss(); // 키보드 닫기
+	};
+	const [inputText, setText] = useState<string>('');
+
 	return (
 		<View style={styles.inputContainer}>
 			<TextInput
@@ -31,20 +43,13 @@ const TodoInput: React.FC = () => {
 				placeholder="Add an item!"
 				placeholderTextColor={'#999'}
 				autoCorrect={false}
+				onChangeText={setText}
+				value={inputText}
 			/>
 			<View style={styles.button}>
-				<Button title={'ADD'} />
+				<Button title={'ADD'} onPress={buttonClick} />
 			</View>
 		</View>
 	);
 };
-
-const addTodo = (text: string) => {
-	const [todoItem, setTodo] = useState<TodoItemModel>();
-
-	let tempItem = new TodoItemModel(text);
-
-	setTodo(tempItem);
-};
-
 export default TodoInput;
