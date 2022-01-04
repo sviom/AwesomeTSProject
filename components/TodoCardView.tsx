@@ -16,8 +16,15 @@ const styles = StyleSheet.create({
 });
 
 const TodoItem: React.FC = () => {
+	const defaultTodoList = new Array<TodoItemModel>();
+
 	const isDarkMode = useColorScheme() === 'dark';
-	const [todoItemList, setTodo] = useState<Array<TodoItemModel>>(new Array<TodoItemModel>());
+	defaultTodoList.push(new TodoItemModel('test'));
+	defaultTodoList.push(new TodoItemModel('test'));
+	defaultTodoList.push(new TodoItemModel('test'));
+
+	// new Array<TodoItemModel>()
+	const [todoItemList, setTodo] = useState<Array<TodoItemModel>>(defaultTodoList);
 
 	const addTodo = (text: string) => {
 		let tempItem = new TodoItemModel(text);
@@ -31,7 +38,7 @@ const TodoItem: React.FC = () => {
 		<View style={styles.card}>
 			{/* <TextInput style={styles.input} placeholder="Add an item!" /> */}
 			<TodoInput onClick={addTodo} />
-			<TodoList />
+			<TodoList todoItemList={todoItemList} />
 		</View>
 	);
 };

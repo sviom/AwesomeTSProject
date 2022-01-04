@@ -3,15 +3,21 @@ import React from 'react';
 import { StyleSheet, Text, useColorScheme, View, TouchableOpacity } from 'react-native';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { TodoItemModel } from '../models';
 
-const TodoItem: React.FC = () => {
+type TodoItemProps = {
+	item: TodoItemModel;
+};
+
+const TodoItem: React.FC<TodoItemProps> = ({ children, item }) => {
 	const isDarkMode = useColorScheme() === 'dark';
+	const text = item.text;
 	return (
 		<View style={styles.container}>
 			<TouchableOpacity>
 				<View style={styles.circle} />
 			</TouchableOpacity>
-			<Text style={styles.text}>TodoList items will be shown here</Text>
+			<Text style={styles.text}>{text}</Text>
 		</View>
 	);
 };
