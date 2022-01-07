@@ -4,7 +4,7 @@ interface IGridCell {
     x_axis: number;
     y_axis: number;
 
-    moveAxios(x: number, y: number): boolean;
+    moveAxis(x: number, y: number): boolean;
 }
 
 class GridCell implements IGridCell {
@@ -23,7 +23,7 @@ class GridCell implements IGridCell {
      * @param y y 축에 더할 숫자
      * @returns 성공 여부
      */
-    moveAxios(x: number, y: number): boolean {
+    moveAxis(x: number, y: number): boolean {
         this.x_axis = this.x_axis + x;
         this.y_axis = this.y_axis + y;
 
