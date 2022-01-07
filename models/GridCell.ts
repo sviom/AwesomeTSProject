@@ -18,7 +18,10 @@ class GridCell implements IGridCell {
     }
 
     moveAxios(x: number, y: number): boolean {
-        throw new Error("Method not implemented.");
+        this.x_axis = x;
+        this.y_axis = y;
+
+        return true;
     }
 }
 
