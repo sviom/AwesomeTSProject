@@ -36,6 +36,8 @@ const TodoInput: React.FC<todoProps> = ({ children, onClick }) => {
 	};
 	const [inputText, setText] = useState<string>('');
 
+	var ss = new TodoItemModel('fdfd');
+
 	return (
 		<View style={styles.inputContainer}>
 			<TextInput
