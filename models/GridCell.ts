@@ -24,8 +24,8 @@ class GridCell implements IGridCell {
      * @returns 성공 여부
      */
     moveAxis(x: number, y: number): boolean {
-        this.x_axis = this.x_axis + x;
-        this.y_axis = this.y_axis + y;
+        this.x_axis += x;
+        this.y_axis += y;
 
         return true;
     }
