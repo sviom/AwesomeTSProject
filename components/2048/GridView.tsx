@@ -26,7 +26,7 @@ const TodoItem: React.FC = () => {
 	}
 	// const [todoItemList, setTodo] = useState<Array<TodoItemModel>>(defaultTodoList);
 
-	return <View style={styles.card}></View>;
+	return <View style={styles.card}>{test}</View>;
 };
 
 export default TodoItem;

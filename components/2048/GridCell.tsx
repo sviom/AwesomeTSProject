@@ -11,13 +11,12 @@ type GridCellProps = {
 
 const TodoItem: React.FC<GridCellProps> = ({ children, item }) => {
 	const isDarkMode = useColorScheme() === 'dark';
-	const text = item.text;
+
 	return (
 		<View style={styles.container}>
 			<TouchableOpacity>
-				<View style={styles.circle} />
+				<View style={[styles.circle, { backgroundColor: item.color }]} />
 			</TouchableOpacity>
-			<Text style={styles.text}>{text}</Text>
 		</View>
 	);
 };
@@ -30,6 +29,8 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
+        width: 100,
+        height: 100
 	},
 	text: {
 		flex: 5,
