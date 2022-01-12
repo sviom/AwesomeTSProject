@@ -3,10 +3,10 @@ import React from 'react';
 import { StyleSheet, Text, useColorScheme, View, TouchableOpacity } from 'react-native';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { Grid, GridCell } from '../..//models';
+import { Grid, GridCellModel } from '../..//models';
 
 type GridCellProps = {
-	item: GridCell;
+	item: GridCellModel;
 };
 
 const TodoItem: React.FC<GridCellProps> = ({ children, item }) => {
@@ -15,7 +15,9 @@ const TodoItem: React.FC<GridCellProps> = ({ children, item }) => {
 	return (
 		<View style={styles.container}>
 			<TouchableOpacity>
-				<View style={[styles.circle, { backgroundColor: item.color }]} />
+				<View style={[styles.circle, { backgroundColor: item.color }]} >
+					<Text>ddfdfd</Text>
+				</View>
 			</TouchableOpacity>
 		</View>
 	);
