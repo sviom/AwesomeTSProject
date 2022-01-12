@@ -12,27 +12,25 @@ type GridCellProps = {
 const TodoItem: React.FC<GridCellProps> = ({ children, item }) => {
 	const isDarkMode = useColorScheme() === 'dark';
 
+	//  style={[styles.circle, { backgroundColor: item.color }]}
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity>
-				<View style={[styles.circle, { backgroundColor: item.color }]} >
-					<Text>ddfdfd</Text>
-				</View>
-			</TouchableOpacity>
+			<Text>ddfdfd</Text>
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		borderBottomColor: '#bbb',
-		borderBottomWidth: StyleSheet.hairlineWidth,
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-between',
-        width: 100,
-        height: 100
+		// flex: 1,
+		// borderBottomColor: '#bbb',
+		// borderBottomWidth: StyleSheet.hairlineWidth,
+		// flexDirection: 'row',
+		// alignItems: 'center',
+		// justifyContent: 'space-between',
+		backgroundColor: 'red',
+		width: 50,
+		height: 50,
 	},
 	text: {
 		flex: 5,

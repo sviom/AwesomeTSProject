@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet, Text, useColorScheme, View, TextInput, ScrollView } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { GridCell } from '.';
@@ -12,10 +13,15 @@ const styles = StyleSheet.create({
 		borderTopRightRadius: 10, // to provide rounded corners
 		marginLeft: 10,
 		marginRight: 10,
+		marginBottom: 10,
 	},
 });
 
-const GridView: React.FC = () => {
+interface IProps {
+	style?: StyleProp<ViewStyle>;
+}
+
+const GridView: React.FC<IProps> = () => {
 	const isDarkMode = useColorScheme() === 'dark';
 	const defaultArray = [
 		[0, 1, 2, 3],
@@ -34,11 +40,16 @@ const GridView: React.FC = () => {
 	// }
 	// const [todoItemList, setTodo] = useState<Array<TodoItemModel>>(defaultTodoList);
 
+	// style={styles.card}
 	return (
 		<View style={styles.card}>
+			<Text>ㅇㅇㅇㅇㅇㅇ </Text>
 			{defaultArray.map((item) => {
+				<Text>dfdfdfdfdffd</Text>
 				item.map((x) => {
-					<GridCell item={new GridCellModel()}></GridCell>;
+					<View>
+						<Text>x</Text>
+					</View>;
 				});
 			})}
 		</View>
