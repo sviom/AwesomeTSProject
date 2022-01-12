@@ -77,7 +77,9 @@ const App = () => {
 				This IS 2048
 			</Text>
 			{/* <TodoCardView /> */}
-			<GridView style={styles.gridView} />
+			<ScrollView>
+				<GridView />
+			</ScrollView>
 
 			{/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */}
 		</SafeAreaView>
@@ -87,11 +89,11 @@ const App = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#3143a8',
+		backgroundColor: 'white',
 	},
 	gridView: {
-		width: 100,
-		height: 100	
+		width: 1000,
+		height: 1000,
 	},
 	appTitle: {
 		color: '#fff',

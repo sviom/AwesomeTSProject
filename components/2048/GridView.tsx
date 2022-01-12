@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
-import { StyleSheet, Text, useColorScheme, View, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, useColorScheme, View, TextInput, ScrollView, StyleProp, ViewStyle } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { GridCell } from '.';
 import { GridCellModel } from '../../models';
 
 const styles = StyleSheet.create({
 	card: {
-		backgroundColor: '#fff',
+		backgroundColor: 'white',
 		flex: 1,
 		borderTopLeftRadius: 10, // to provide rounded corners
 		borderTopRightRadius: 10, // to provide rounded corners
 		marginLeft: 10,
 		marginRight: 10,
 		marginBottom: 10,
+	},
+	row: {
+		flex: 1,
+		flexDirection: 'row',
 	},
 });
 
@@ -43,14 +46,14 @@ const GridView: React.FC<IProps> = () => {
 	// style={styles.card}
 	return (
 		<View style={styles.card}>
-			<Text>ㅇㅇㅇㅇㅇㅇ </Text>
 			{defaultArray.map((item) => {
-				<Text>dfdfdfdfdffd</Text>
-				item.map((x) => {
-					<View>
-						<Text>x</Text>
-					</View>;
-				});
+				return (
+					<View style={styles.row}>
+						{item.map((x) => {
+							return <GridCell item={new GridCellModel()}></GridCell>;
+						})}
+					</View>
+				);
 			})}
 		</View>
 	);

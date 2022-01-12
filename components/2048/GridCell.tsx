@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, useColorScheme, View, TouchableOpacity } from 'react-native';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { Grid, GridCellModel } from '../..//models';
+import { Grid, GridCellModel } from '../../models';
 
 type GridCellProps = {
 	item: GridCellModel;
@@ -28,9 +28,10 @@ const styles = StyleSheet.create({
 		// flexDirection: 'row',
 		// alignItems: 'center',
 		// justifyContent: 'space-between',
-		backgroundColor: 'red',
-		width: 50,
-		height: 50,
+		backgroundColor: '#13c276',
+		width: 70,
+		height: 70,
+		margin: 10
 	},
 	text: {
 		flex: 5,
