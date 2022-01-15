@@ -6,7 +6,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Grid, GridCellModel } from '../../models';
 
 type GridCellProps = {
-	item: GridCellModel;
+	item?: GridCellModel;
 };
 
 const TodoItem: React.FC<GridCellProps> = ({ children, item }) => {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, useColorScheme, View, TextInput, ScrollView, StyleProp, ViewStyle } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { GridCell } from '.';
-import { GridCellModel } from '../../models';
+import { GridCellModel, GridRowModel } from '../../models';
 
 const styles = StyleSheet.create({
 	card: {
@@ -29,28 +29,19 @@ const GridView: React.FC<IProps> = () => {
 	const defaultArray = [
 		[0, 1, 2, 3],
 		[5, 6, 7, 8],
-		[9, 10, 11, 12],
+		[9, 10, new GridCellModel(), 12],
 		[13, 14, 15, 16],
 	];
 
-	// let test = new Array<Array<GridCell>>();
-	// for (let rowIndex = 0; rowIndex < 4; rowIndex++) {
-	// 	let sss = test[rowIndex];
-	// 	sss = new Array<GridCell>();
-	// 	for (let columnIndex = 0; columnIndex < 4; columnIndex++) {
-	// 		sss.push(new GridCell());
-	// 	}
-	// }
-	// const [todoItemList, setTodo] = useState<Array<TodoItemModel>>(defaultTodoList);
+	const testArray = new Array<GridRowModel>(4);
 
-	// style={styles.card}
 	return (
 		<View style={styles.card}>
-			{defaultArray.map((item) => {
+			{defaultArray.map((item, row_index) => {
 				return (
 					<View style={styles.row}>
-						{item.map((x) => {
-							return <GridCell item={new GridCellModel()}></GridCell>;
+						{item.map((x, column_index) => {
+							return <GridCell></GridCell>;
 						})}
 					</View>
 				);
