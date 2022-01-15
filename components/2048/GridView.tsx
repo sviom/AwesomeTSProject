@@ -26,21 +26,19 @@ interface IProps {
 
 const GridView: React.FC<IProps> = () => {
 	const isDarkMode = useColorScheme() === 'dark';
-	const defaultArray = [
-		[0, 1, 2, 3],
-		[5, 6, 7, 8],
-		[9, 10, new GridCellModel(), 12],
-		[13, 14, 15, 16],
-	];
-
 	const testArray = new Array<GridRowModel>(4);
+
+	const randomNum = Math.random() * 5;
+	const randomNumFloor = Math.floor(randomNum); // 0 ~ 4 사이 숫자 추출
+
+	testArray[randomNumFloor] = new GridRowModel();
 
 	return (
 		<View style={styles.card}>
-			{defaultArray.map((item, row_index) => {
+			{testArray.map((row, row_index) => {
 				return (
 					<View style={styles.row}>
-						{item.map((x, column_index) => {
+						{row.GridCells.map((cell, column_index) => {
 							return <GridCell></GridCell>;
 						})}
 					</View>

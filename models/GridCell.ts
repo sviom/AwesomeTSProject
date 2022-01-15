@@ -12,6 +12,7 @@ class GridCell implements IGridCell {
     color: string = "red";
     x_axis: number = 0;
     y_axis: number = 0;
+    now_number: number = 0;
 
     constructor() {
         this.id = Math.random().toString();
@@ -28,6 +29,10 @@ class GridCell implements IGridCell {
         this.y_axis += y;
 
         return true;
+    }
+
+    setNumber(x: number) {
+        this.now_number = x;
     }
 }
 
