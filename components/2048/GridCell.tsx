@@ -11,11 +11,12 @@ type GridCellProps = {
 
 const TodoItem: React.FC<GridCellProps> = ({ children, item }) => {
 	const isDarkMode = useColorScheme() === 'dark';
+	const cell_text = item?.now_number;
 
 	//  style={[styles.circle, { backgroundColor: item.color }]}
 	return (
 		<View style={styles.container}>
-			<Text>ddfdfd</Text>
+			<Text>{cell_text}</Text>
 		</View>
 	);
 };
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#13c276',
 		width: 70,
 		height: 70,
-		margin: 10
+		margin: 10,
 	},
 	text: {
 		flex: 5,

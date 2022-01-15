@@ -31,7 +31,16 @@ const GridView: React.FC<IProps> = () => {
 	const randomNum = Math.random() * 5;
 	const randomNumFloor = Math.floor(randomNum); // 0 ~ 4 사이 숫자 추출
 
-	testArray[randomNumFloor] = new GridRowModel();
+	console.log('start');
+
+	for (let iterator of testArray) {
+		console.log("생성??");
+		iterator = new GridRowModel();
+	}
+
+	console.log('Random number : ', randomNumFloor);
+
+	// testArray[randomNumFloor] = new GridRowModel();
 
 	return (
 		<View style={styles.card}>
@@ -39,7 +48,7 @@ const GridView: React.FC<IProps> = () => {
 				return (
 					<View style={styles.row}>
 						{row.GridCells.map((cell, column_index) => {
-							return <GridCell></GridCell>;
+							return <GridCell item={cell}></GridCell>;
 						})}
 					</View>
 				);
