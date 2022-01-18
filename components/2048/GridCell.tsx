@@ -14,11 +14,7 @@ const TodoItem: React.FC<GridCellProps> = ({ children, item }) => {
 	const cell_text = item?.now_number;
 
 	//  style={[styles.circle, { backgroundColor: item.color }]}
-	return (
-		<View style={styles.container}>
-			<Text>{cell_text}</Text>
-		</View>
-	);
+	return <View style={styles.container}>{cell_text != 0 ? <Text>{cell_text}</Text> : null}</View>;
 };
 
 const styles = StyleSheet.create({

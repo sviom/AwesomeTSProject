@@ -26,25 +26,29 @@ interface IProps {
 
 const GridView: React.FC<IProps> = () => {
 	const isDarkMode = useColorScheme() === 'dark';
-	const testArray = new Array<GridRowModel>(4);
+	let testArray: Array<GridRowModel> = new Array<GridRowModel>(4);
+	let test2Array: Array<Number> = new Array<Number>(4);
 
 	const randomNum = Math.random() * 5;
 	const randomNumFloor = Math.floor(randomNum); // 0 ~ 4 사이 숫자 추출
 
-	console.log('start');
-
-	for (let iterator of testArray) {
-		console.log("생성??");
-		iterator = new GridRowModel();
+	for (let index = 0; index < 4; index++) {
+		let test = new GridRowModel();
+		testArray.push(test);
 	}
 
-	console.log('Random number : ', randomNumFloor);
-
-	// testArray[randomNumFloor] = new GridRowModel();
+	// // testArray[randomNumFloor] = new GridRowModel();
+	console.log('array 122: ', test2Array);
+	// for (let iterator of testArray) {
+	// 	iterator = new GridRowModel();
+	// 	console.log("두번쨰 : ", iterator.id)
+	// }
 
 	return (
 		<View style={styles.card}>
+			<Text>{Math.random()}</Text>
 			{testArray.map((row, row_index) => {
+				console.log('row : ', row);
 				return (
 					<View style={styles.row}>
 						{row.GridCells.map((cell, column_index) => {
