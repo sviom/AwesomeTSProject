@@ -26,23 +26,32 @@ interface IProps {
 
 const GridView: React.FC<IProps> = () => {
 	const isDarkMode = useColorScheme() === 'dark';
-	let testArray: Array<GridRowModel> = new Array<GridRowModel>(4);
-	let test2Array: Array<Number> = new Array<Number>(4);
-
-	const randomNum = Math.random() * 5;
-	const randomNumFloor = Math.floor(randomNum); // 0 ~ 4 사이 숫자 추출
+	let testArray: Array<GridRowModel> = new Array<GridRowModel>();
 
 	for (let index = 0; index < 4; index++) {
-		let test = new GridRowModel();
+		let test: GridRowModel = new GridRowModel();
 		testArray.push(test);
 	}
 
-	// // testArray[randomNumFloor] = new GridRowModel();
-	console.log('array 122: ', test2Array);
-	// for (let iterator of testArray) {
-	// 	iterator = new GridRowModel();
-	// 	console.log("두번쨰 : ", iterator.id)
-	// }
+	for (let index = 0; index < 2; index++) {
+		const randomNum = Math.random() * 16;
+		const randomNumFloor = Math.floor(randomNum); // 0 ~ 16 사이 숫자 추출
+
+		let row_index: number = 0;
+
+		if (randomNumFloor < 4) {
+			row_index = 0;
+		} else if (randomNumFloor >= 4 && randomNumFloor < 8) {
+			row_index = 1;
+		} else if (randomNumFloor >= 8 && randomNumFloor < 12) {
+			row_index = 2;
+		} else {
+			row_index = 3;
+		}
+
+		let rowItem = testArray[row_index];
+		rowItem.setRandomCell();
+	}
 
 	return (
 		<View style={styles.card}>
@@ -50,9 +59,9 @@ const GridView: React.FC<IProps> = () => {
 			{testArray.map((row, row_index) => {
 				console.log('row : ', row);
 				return (
-					<View style={styles.row}>
+					<View style={styles.row} key={`row_${Math.random()}`}>
 						{row.GridCells.map((cell, column_index) => {
-							return <GridCell item={cell}></GridCell>;
+							return <GridCell item={cell} key={`test_${Math.random()}`}></GridCell>;
 						})}
 					</View>
 				);
