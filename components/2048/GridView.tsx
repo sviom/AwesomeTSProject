@@ -1,3 +1,4 @@
+import { tsConstructorType } from '@babel/types';
 import React, { useState } from 'react';
 import {
 	StyleSheet,
@@ -38,26 +39,9 @@ const GridView: React.FC<IProps> = () => {
 	const isDarkMode = useColorScheme() === 'dark';
 	let testArray: Array<GridRowModel> = new Array<GridRowModel>();
 
-	const [gridArray, setGrid] = useState<Array<GridRowModel>>(testArray);
-
-	const addTodo = () => {
-		// let newArray = [...gridArray, tempItem];
-		// setGrid(newArray);
-		let tempArray = findEmptyCells();
-
-		tempArray.forEach((row, row_index) => {
-			row.GridCells.forEach((cell, column_index) => {
-				console.log('값 : ', cell.now_number);
-			});
-		});
-
-		let newArray = [...tempArray];
-		setGrid(newArray);
-	};
-
 	for (let index = 0; index < 4; index++) {
 		let test: GridRowModel = new GridRowModel();
-		gridArray.push(test);
+		testArray.push(test);
 	}
 
 	for (let index = 0; index < 2; index++) {
@@ -76,9 +60,26 @@ const GridView: React.FC<IProps> = () => {
 			row_index = 3;
 		}
 
-		let rowItem = gridArray[row_index];
+		let rowItem = testArray[row_index];
 		rowItem.setRandomCell();
 	}
+
+	const [gridArray, setGrid] = useState<Array<GridRowModel>>(testArray);
+
+	const addTodo = () => {
+		// let newArray = [...gridArray, tempItem];
+		// setGrid(newArray);
+		let tempArray = findEmptyCells();
+
+		tempArray.forEach((row, row_index) => {
+			row.GridCells.forEach((cell, column_index) => {
+				console.log('값 : ', cell.now_number);
+			});
+		});
+
+		let newArray: Array<GridRowModel> = []; //  [...tempArray];
+		setGrid(newArray);
+	};
 
 	let emptyArray: Array<[number, number]> = [];
 
