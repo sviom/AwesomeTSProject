@@ -26,6 +26,11 @@ class GridRow implements IGridRow {
         let cell = this.GridCells[randomNumFloor];
         cell.setNumber(2);
     }
+
+    findEmptyColumn(column_index: number) {
+        let item = this.GridCells.find(x => x.y_axis == column_index);
+        return item == undefined;
+    }
 }
 
 export default GridRow
