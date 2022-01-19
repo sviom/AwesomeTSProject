@@ -38,9 +38,26 @@ const GridView: React.FC<IProps> = () => {
 	const isDarkMode = useColorScheme() === 'dark';
 	let testArray: Array<GridRowModel> = new Array<GridRowModel>();
 
+	const [gridArray, setGrid] = useState<Array<GridRowModel>>(testArray);
+
+	const addTodo = () => {
+		// let newArray = [...gridArray, tempItem];
+		// setGrid(newArray);
+		let tempArray = findEmptyCells();
+
+		tempArray.forEach((row, row_index) => {
+			row.GridCells.forEach((cell, column_index) => {
+				console.log('값 : ', cell.now_number);
+			});
+		});
+
+		let newArray = [...tempArray];
+		setGrid(newArray);
+	};
+
 	for (let index = 0; index < 4; index++) {
 		let test: GridRowModel = new GridRowModel();
-		testArray.push(test);
+		gridArray.push(test);
 	}
 
 	for (let index = 0; index < 2; index++) {
@@ -59,7 +76,7 @@ const GridView: React.FC<IProps> = () => {
 			row_index = 3;
 		}
 
-		let rowItem = testArray[row_index];
+		let rowItem = gridArray[row_index];
 		rowItem.setRandomCell();
 	}
 
@@ -68,7 +85,7 @@ const GridView: React.FC<IProps> = () => {
 	function findEmptyCells() {
 		emptyArray = new Array<[number, number]>();
 
-		testArray.forEach((row, row_index) => {
+		gridArray.forEach((row, row_index) => {
 			row.GridCells.forEach((cell, column_index) => {
 				if (cell.now_number == 0) {
 					//setRandom();
@@ -81,10 +98,11 @@ const GridView: React.FC<IProps> = () => {
 		});
 		console.log('empty array : ', emptyArray);
 
-		setRandom();
+		return setRandom();
 	}
 
 	function setRandom() {
+		// let tempArray: Array<GridRowModel> = new Array<GridRowModel>();
 		const randomNum = Math.random() * 16;
 		const randomNumFloor = Math.floor(randomNum); // 0 ~ 16 사이 숫자 추출
 		let new_row_index: number = 0;
@@ -105,27 +123,34 @@ const GridView: React.FC<IProps> = () => {
 		console.log('empty item : ', item);
 		if (!item) {
 			// 가로에 있으면 세로에서 빈 항목을 찾음
-			let existItem = testArray[new_row_index];
+			let existItem = gridArray[new_row_index];
 			let result = false;
 			do {
 				let result = existItem.findEmptyColumn();
-				console.log("result : ", result);
+				console.log('result : ', result);
 				if (result) {
 					existItem.setRandomCell();
 				}
 			} while (result);
 		} else {
-			let rowItem = testArray[new_row_index];
+			let rowItem = gridArray[new_row_index];
 			rowItem.setRandomCell();
 		}
 
-		console.log("test array : ", testArray);
+		// console.log('test array : ', testArray);
+		// let sss = testArray;
+		// testArray = new testArray.forEach((row, row_index) => {
+		// 	row.GridCells.forEach((cell, column_index) => {
+		// 		console.log('값 : ', cell.now_number);
+		// 	});
+		// });
+		return gridArray;
 	}
 
 	return (
 		<View style={styles.card}>
 			<Text>{Math.random()}</Text>
-			{testArray.map((row, row_index) => {
+			{gridArray.map((row, row_index) => {
 				return (
 					<View style={styles.row} key={`row_${Math.random()}`}>
 						{row.GridCells.map((cell, column_index) => {
@@ -135,7 +160,7 @@ const GridView: React.FC<IProps> = () => {
 				);
 			})}
 
-			<Button title="ddfdfd" onPress={findEmptyCells} />
+			<Button title="ddfdfd" onPress={addTodo} />
 		</View>
 	);
 };
