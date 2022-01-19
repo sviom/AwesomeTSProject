@@ -87,7 +87,6 @@ const GridView: React.FC<IProps> = () => {
 	function setRandom() {
 		const randomNum = Math.random() * 16;
 		const randomNumFloor = Math.floor(randomNum); // 0 ~ 16 사이 숫자 추출
-		console.log('Number : ', randomNumFloor);
 		let new_row_index: number = 0;
 
 		if (randomNumFloor < 4) {
@@ -100,20 +99,27 @@ const GridView: React.FC<IProps> = () => {
 			new_row_index = 3;
 		}
 
+		console.log('new index : ', new_row_index);
+
 		let item = emptyArray.find((x) => x[0] == new_row_index);
+		console.log('empty item : ', item);
 		if (!item) {
+			// 가로에 있으면 세로에서 빈 항목을 찾음
+			let existItem = testArray[new_row_index];
+			let result = false;
+			do {
+				let result = existItem.findEmptyColumn();
+				console.log("result : ", result);
+				if (result) {
+					existItem.setRandomCell();
+				}
+			} while (result);
+		} else {
 			let rowItem = testArray[new_row_index];
 			rowItem.setRandomCell();
-		} else {
-			// 가로에 있으면 세로에서 빈 항목을 찾음
-			let column_index = item[1];
-			let row_index = item[0];
-			let rowItem = testArray[row_index];
-			let result = rowItem.findEmptyColumn(column_index);
-			if (result) {
-				rowItem.setRandomCell();
-			}
 		}
+
+		console.log("test array : ", testArray);
 	}
 
 	return (
