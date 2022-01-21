@@ -21,18 +21,21 @@ class GridRow implements IGridRow {
     }
 
     setRandomCell() {
-        console.log("여기를 타는가?");
-        const randomNum = Math.random() * 3;
-        const randomNumFloor = Math.floor(randomNum); // 0 ~ 4 사이 숫자 추출
-        let cell = this.GridCells[randomNumFloor];
-        cell.setNumber(2);
+        let setCompleted = true;
+        do {
+            const randomNum = Math.random() * 4;
+            const randomNumFloor = Math.floor(randomNum); // 0 ~ 4 사이 숫자 추출
+            let cell = this.GridCells[randomNumFloor];
+            if (cell.now_number == 0) {
+                cell.setNumber(2);
+                setCompleted = false;
+            }
+        } while (setCompleted)
     }
 
     findEmptyColumn() {
-        const randomNum = Math.random() * 3;
-        const randomNumFloor = Math.floor(randomNum); // 0 ~ 4 사이 숫자 추출
-        let item = this.GridCells.find(x => x.y_axis == randomNumFloor);
-        return item == undefined;
+        let item = this.GridCells.filter(x => x.now_number == 0);
+        return item.length > 0;
     }
 }
 
