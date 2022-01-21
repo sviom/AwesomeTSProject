@@ -1,4 +1,5 @@
 import { GridCellModel } from ".";
+import { getRandomNumber } from "../utils/NumberUtil";
 
 interface IGridRow {
     id: string;
@@ -23,9 +24,7 @@ class GridRow implements IGridRow {
     setRandomCell() {
         let setCompleted = true;
         do {
-            const randomNum = Math.random() * 4;
-            const randomNumFloor = Math.floor(randomNum); // 0 ~ 4 사이 숫자 추출
-            let cell = this.GridCells[randomNumFloor];
+            let cell = this.GridCells[getRandomNumber()];
             if (cell.now_number == 0) {
                 cell.setNumber(2);
                 setCompleted = false;

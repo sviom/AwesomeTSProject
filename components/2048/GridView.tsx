@@ -14,6 +14,7 @@ import {
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { GridCell } from '.';
 import { GridCellModel, GridRowModel } from '../../models';
+import { getRandomNumber } from '../../utils/NumberUtil';
 
 const styles = StyleSheet.create({
 	card: {
@@ -45,20 +46,7 @@ const GridView: React.FC<IProps> = () => {
 	}
 
 	for (let index = 0; index < 2; index++) {
-		const randomNum = Math.random() * 16;
-		const randomNumFloor = Math.floor(randomNum); // 0 ~ 16 사이 숫자 추출
-		let row_index: number = 0;
-
-		if (randomNumFloor < 4) {
-			row_index = 0;
-		} else if (randomNumFloor >= 4 && randomNumFloor < 8) {
-			row_index = 1;
-		} else if (randomNumFloor >= 8 && randomNumFloor < 12) {
-			row_index = 2;
-		} else {
-			row_index = 3;
-		}
-
+		let row_index: number = getRandomNumber();
 		let rowItem = testArray[row_index];
 		rowItem.setRandomCell();
 	}
@@ -95,17 +83,6 @@ const GridView: React.FC<IProps> = () => {
 		});
 
 		return setRandom();
-	}
-
-	/**
-	 * 랜덤한 숫자 받기
-	 * @param max_value 원하는 최대값
-	 * @returns 0과 max_value사이에 존재하는 랜덤한 값
-	 */
-	function getRandomNumber(max_value: number = 4) {
-		const randomNum = Math.random() * Math.abs(max_value);
-		const randomNumFloor = Math.floor(randomNum); // 0 ~ 3 사이 숫자 추출
-		return randomNumFloor;
 	}
 
 	function setRandom() {
