@@ -47,7 +47,6 @@ const GridView: React.FC<IProps> = () => {
 	for (let index = 0; index < 2; index++) {
 		const randomNum = Math.random() * 16;
 		const randomNumFloor = Math.floor(randomNum); // 0 ~ 16 사이 숫자 추출
-		console.log('Number : ', randomNumFloor);
 		let row_index: number = 0;
 
 		if (randomNumFloor < 4) {
@@ -71,13 +70,7 @@ const GridView: React.FC<IProps> = () => {
 		// setGrid(newArray);
 		let tempArray = findEmptyCells();
 
-		tempArray.forEach((row, row_index) => {
-			row.GridCells.forEach((cell, column_index) => {
-				console.log('값 : ', cell.now_number);
-			});
-		});
-
-		let newArray: Array<GridRowModel> = []; //  [...tempArray];
+		let newArray: Array<GridRowModel> = [...tempArray]; // []; //
 		setGrid(newArray);
 	};
 
@@ -97,54 +90,39 @@ const GridView: React.FC<IProps> = () => {
 				}
 			});
 		});
-		console.log('empty array : ', emptyArray);
 
 		return setRandom();
 	}
 
+	function getRandomNumber(max_value: number = 4) {
+		const randomNum = Math.random() * Math.abs(max_value);
+		const randomNumFloor = Math.floor(randomNum); // 0 ~ 3 사이 숫자 추출
+		return randomNumFloor;
+	}
+
 	function setRandom() {
-		// let tempArray: Array<GridRowModel> = new Array<GridRowModel>();
-		const randomNum = Math.random() * 16;
-		const randomNumFloor = Math.floor(randomNum); // 0 ~ 16 사이 숫자 추출
-		let new_row_index: number = 0;
-
-		if (randomNumFloor < 4) {
-			new_row_index = 0;
-		} else if (randomNumFloor >= 4 && randomNumFloor < 8) {
-			new_row_index = 1;
-		} else if (randomNumFloor >= 8 && randomNumFloor < 12) {
-			new_row_index = 2;
-		} else {
-			new_row_index = 3;
-		}
-
-		console.log('new index : ', new_row_index);
-
-		let item = emptyArray.find((x) => x[0] == new_row_index);
-		console.log('empty item : ', item);
-		if (!item) {
-			// 가로에 있으면 세로에서 빈 항목을 찾음
-			let existItem = gridArray[new_row_index];
-			let result = false;
-			do {
-				let result = existItem.findEmptyColumn();
-				console.log('result : ', result);
-				if (result) {
-					existItem.setRandomCell();
-				}
-			} while (result);
-		} else {
-			let rowItem = gridArray[new_row_index];
-			rowItem.setRandomCell();
-		}
-
-		// console.log('test array : ', testArray);
-		// let sss = testArray;
-		// testArray = new testArray.forEach((row, row_index) => {
-		// 	row.GridCells.forEach((cell, column_index) => {
-		// 		console.log('값 : ', cell.now_number);
-		// 	});
-		// });
+		let endWhile = true;
+		do {
+			let new_row_index: number = getRandomNumber();
+			let empty_list = emptyArray.filter((x) => x[0] == new_row_index);
+			let item = empty_list[getRandomNumber(empty_list.length)];
+			if (item) {
+				// 가로에 있으면 세로에서 빈 항목을 찾음
+				let existItem: GridRowModel = gridArray[item[0]];
+				let result = true;
+				do {
+					result = existItem.findEmptyColumn();
+					if (result) {
+						existItem.setRandomCell();
+						endWhile = false;
+						result = false;
+					}
+				} while (result);
+			} else {
+				// GAME OVER --> 빈 칸이 없음
+				endWhile = false;
+			}
+		} while (endWhile);
 		return gridArray;
 	}
 
