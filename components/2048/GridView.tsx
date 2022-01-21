@@ -76,9 +76,12 @@ const GridView: React.FC<IProps> = () => {
 
 	let emptyArray: Array<[number, number]> = [];
 
+	/**
+	 * 현재 배열에서 빈 항목을 찾아 숫자 부여해주는 함수
+	 * @returns 랜덤하게 부여된 숫자가 있는 새로운 배열
+	 */
 	function findEmptyCells() {
 		emptyArray = new Array<[number, number]>();
-
 		gridArray.forEach((row, row_index) => {
 			row.GridCells.forEach((cell, column_index) => {
 				if (cell.now_number == 0) {
@@ -94,6 +97,11 @@ const GridView: React.FC<IProps> = () => {
 		return setRandom();
 	}
 
+	/**
+	 * 랜덤한 숫자 받기
+	 * @param max_value 원하는 최대값
+	 * @returns 0과 max_value사이에 존재하는 랜덤한 값
+	 */
 	function getRandomNumber(max_value: number = 4) {
 		const randomNum = Math.random() * Math.abs(max_value);
 		const randomNumFloor = Math.floor(randomNum); // 0 ~ 3 사이 숫자 추출
@@ -105,7 +113,7 @@ const GridView: React.FC<IProps> = () => {
 		do {
 			let new_row_index: number = getRandomNumber();
 			let empty_list = emptyArray.filter((x) => x[0] == new_row_index);
-			let item = empty_list[getRandomNumber(empty_list.length)];
+			let item = empty_list[getRandomNumber(empty_list.length)]; // 빈항목들 중에서 랜덤하게 가로 한줄 추출
 			if (item) {
 				// 가로에 있으면 세로에서 빈 항목을 찾음
 				let existItem: GridRowModel = gridArray[item[0]];
@@ -113,7 +121,7 @@ const GridView: React.FC<IProps> = () => {
 				do {
 					result = existItem.findEmptyColumn();
 					if (result) {
-						existItem.setRandomCell();
+						existItem.setRandomCell(); // 가로/세로에 빈 항목 있음 -> 랜덤하게 셀 부여해주어야 하는 부분
 						endWhile = false;
 						result = false;
 					}
