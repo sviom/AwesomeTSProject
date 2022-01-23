@@ -11,11 +11,12 @@ import {
 	ViewStyle,
 	Button,
 } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { GridCell } from '.';
 import { GridCellModel, GridRowModel } from '../../models';
 import { getRandomNumber } from '../../utils/NumberUtil';
-import { findEmptyCells } from "./2048Rules";
+import { findEmptyCells } from './2048Rules';
 
 const styles = StyleSheet.create({
 	card: {
@@ -64,20 +65,22 @@ const GridView: React.FC<IProps> = () => {
 	};
 
 	return (
-		<View style={styles.card}>
-			<Text>{Math.random()}</Text>
-			{gridArray.map((row, row_index) => {
-				return (
-					<View style={styles.row} key={`row_${Math.random()}`}>
-						{row.GridCells.map((cell, column_index) => {
-							return <GridCell item={cell} key={`test_${Math.random()}`}></GridCell>;
-						})}
-					</View>
-				);
-			})}
+		<GestureHandlerRootView>
+			<View style={styles.card}>
+				<Text>{Math.random()}</Text>
+				{gridArray.map((row, row_index) => {
+					return (
+						<View style={styles.row} key={`row_${Math.random()}`}>
+							{row.GridCells.map((cell, column_index) => {
+								return <GridCell item={cell} key={`test_${Math.random()}`}></GridCell>;
+							})}
+						</View>
+					);
+				})}
 
-			<Button title="ddfdfd" onPress={addTodo} />
-		</View>
+				<Button title="ddfdfd" onPress={addTodo} />
+			</View>
+		</GestureHandlerRootView>
 	);
 };
 
