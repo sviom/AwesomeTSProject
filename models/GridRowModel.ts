@@ -32,7 +32,7 @@ class GridRow implements IGridRow {
         } while (setCompleted)
     }
 
-    findEmptyColumn() {
+    findHasEmptyColumn() {
         let item = this.GridCells.filter(x => x.now_number == 0);
         return item.length > 0;
     }

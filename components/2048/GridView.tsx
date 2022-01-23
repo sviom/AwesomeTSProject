@@ -96,7 +96,7 @@ const GridView: React.FC<IProps> = () => {
 				let existItem: GridRowModel = gridArray[item[0]];
 				let result = true;
 				do {
-					result = existItem.findEmptyColumn();
+					result = existItem.findHasEmptyColumn();
 					if (result) {
 						existItem.setRandomCell(); // 가로/세로에 빈 항목 있음 -> 랜덤하게 셀 부여해주어야 하는 부분
 						endWhile = false;
