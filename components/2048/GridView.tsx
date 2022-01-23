@@ -11,7 +11,6 @@ import {
 	ViewStyle,
 	Button,
 } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { GridCell } from '.';
 import { GridCellModel, GridRowModel } from '../../models';
@@ -65,22 +64,20 @@ const GridView: React.FC<IProps> = () => {
 	};
 
 	return (
-		<GestureHandlerRootView>
-			<View style={styles.card}>
-				<Text>{Math.random()}</Text>
-				{gridArray.map((row, row_index) => {
-					return (
-						<View style={styles.row} key={`row_${Math.random()}`}>
-							{row.GridCells.map((cell, column_index) => {
-								return <GridCell item={cell} key={`test_${Math.random()}`}></GridCell>;
-							})}
-						</View>
-					);
-				})}
+		<View style={styles.card}>
+			<Text>{Math.random()}</Text>
+			{gridArray.map((row, row_index) => {
+				return (
+					<View style={styles.row} key={`row_${Math.random()}`}>
+						{row.GridCells.map((cell, column_index) => {
+							return <GridCell item={cell} key={`test_${Math.random()}`}></GridCell>;
+						})}
+					</View>
+				);
+			})}
 
-				<Button title="ddfdfd" onPress={addTodo} />
-			</View>
-		</GestureHandlerRootView>
+			<Button title="ddfdfd" onPress={addTodo} />
+		</View>
 	);
 };
 
