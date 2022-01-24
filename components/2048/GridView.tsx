@@ -66,10 +66,15 @@ const GridView: React.FC<IProps> = () => {
 	const addTodo = () => {
 		// let newArray = [...gridArray, tempItem];
 		// setGrid(newArray);
-		let tempArray = findEmptyCells(gridArray);
+		let findResult = findEmptyCells(gridArray);
+		let isNotGameOver = findResult[1];
 
-		let newArray: Array<GridRowModel> = [...tempArray]; // []; //
-		setGrid(newArray);
+		if (isNotGameOver) {
+			let newGridArray = findResult[0];
+
+			let newArray: Array<GridRowModel> = [...newGridArray]; // []; //
+			setGrid(newArray);
+		}
 	};
 
 	const onSwipe = (gestureName: string, gestureState: PanResponderGestureState) => {

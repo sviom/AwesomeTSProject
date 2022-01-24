@@ -13,7 +13,7 @@ function isGameOverState(gridArray: GridRowModel[]): boolean {
  * 현재 배열에서 빈 항목을 찾아 숫자 부여해주는 함수
  * @returns 랜덤하게 부여된 숫자가 있는 새로운 배열
  */
-function findEmptyCells(gridArray: GridRowModel[]) {
+function findEmptyCells(gridArray: GridRowModel[]): [GridRowModel[], boolean] {
     let emptyArray = new Array<[number, number]>();
     gridArray.forEach((row, row_index) => {
         row.GridCells.forEach((cell, column_index) => {
@@ -27,7 +27,7 @@ function findEmptyCells(gridArray: GridRowModel[]) {
         });
     });
 
-    return setRandom(gridArray, emptyArray);
+    return [setRandom(gridArray, emptyArray), emptyArray.length > 0];
 }
 
 function setRandom(gridArray: GridRowModel[], emptyArray: Array<[number, number]>): GridRowModel[] {
