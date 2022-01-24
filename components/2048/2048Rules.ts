@@ -31,7 +31,7 @@ function findEmptyCells(gridArray: GridRowModel[]) {
 }
 
 function setRandom(gridArray: GridRowModel[], emptyArray: Array<[number, number]>): GridRowModel[] {
-    let new_row_index: number = getRandomNumber(emptyArray.length);
+    let new_row_index: number = getRandomNumber(emptyArray.length - 1);
     const emptyCellInfo = emptyArray[new_row_index];
     const row = gridArray[emptyCellInfo[0]];
     const cell = row.GridCells[emptyCellInfo[1]];
