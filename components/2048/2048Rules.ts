@@ -31,9 +31,26 @@ function findEmptyCells(gridArray: GridRowModel[]) {
 }
 
 function setRandom(gridArray: GridRowModel[], emptyArray: Array<[number, number]>): GridRowModel[] {
+    let new_row_index: number = getRandomNumber(emptyArray.length);
+    const emptyCellInfo = emptyArray[new_row_index];
+    const row = gridArray[emptyCellInfo[0]];
+    const cell = row.GridCells[emptyCellInfo[1]];
+    cell.setNumber(2);
+
+    return gridArray;
+
     let endWhile = true;
     do {
-        let new_row_index: number = getRandomNumber();
+        let new_row_index: number = getRandomNumber(emptyArray.length);
+
+
+        const ii = emptyArray[new_row_index];
+        const row = gridArray[ii[0]];
+        const column = row.GridCells[ii[1]];
+
+        column.setNumber(2);
+
+
         let empty_list = emptyArray.filter((x) => x[0] == new_row_index);
         let item = empty_list[getRandomNumber(empty_list.length)]; // 빈항목들 중에서 랜덤하게 가로 한줄 추출
         if (item) {
