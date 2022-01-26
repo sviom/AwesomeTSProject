@@ -1,4 +1,4 @@
-import { GridRowModel } from "../../models";
+import { GridRowModel, GridCellModel } from "../../models";
 import { getRandomNumber } from "../../utils/NumberUtil";
 
 function isGameOverState(gridArray: GridRowModel[]): boolean {
@@ -8,6 +8,91 @@ function isGameOverState(gridArray: GridRowModel[]): boolean {
     return true;
 }
 
+
+
+function SwipeCells(gridArray: GridRowModel[], direction: string): GridRowModel[] {
+
+    function 다음셀과합치기(array: GridCellModel[], now_index: number = 0, completed_index: number = -1) {
+        console.log("값들 : ", now_index, completed_index);
+
+
+        if (completed_index == now_index) {
+            다음셀과합치기(array, now_index + 1, completed_index + 1);
+            return;
+        }
+
+        if (now_index + 1 >= array.length) {
+            다음셀과합치기(array, 0, completed_index);
+            return;
+        }
+
+        if (completed_index > now_index) {
+            다음셀과합치기(array, now_index + 1, completed_index);
+            return;
+        }
+
+        if (completed_index + 1 == array.length)
+            return;
+
+
+        let nowCell: GridCellModel = array[now_index];
+        let nextCell: GridCellModel = array[now_index + 1];
+
+        if (nowCell.now_number == nextCell.now_number) {
+            nowCell.setNumber(nowCell.now_number + nextCell.now_number);
+            nextCell.setNumber(0);
+
+        } else {
+            if (nowCell.now_number == 0) {
+                nowCell.setNumber(nextCell.now_number);
+                nextCell.setNumber(0);
+            } else {
+                // completed_index = now_index;
+            }
+        }
+
+        completed_index = now_index;
+
+        다음셀과합치기(array, now_index + 1, completed_index);
+        return;
+    }
+
+    // 2 2 0 0 
+
+
+    // 2 2 2 2   0
+    // 4 0 2 2   1
+    // 4 2 0 2   2
+    // 4 2 2 0   3 
+    // 4 4 0 0   
+
+    // 2 16 8 8 
+    // 2 16 16 0 
+
+    // 4 2 2 0 
+    // 4 4 0 0 
+
+    let tempArray: GridCellModel[] = [];
+
+
+    // 모든 항목을 왼쪽으로 붙이기 
+    gridArray.forEach((row, row_index) => {
+        console.log("dd");
+
+        // 방향에 따라 한쪽으로 반전 시켜 시작
+        tempArray = direction == "LEFT" ? row.GridCells : row.GridCells.reverse();
+        다음셀과합치기(tempArray, 0, -1);
+        // 결과 값 다시 반전 
+        tempArray = direction == "LEFT" ? tempArray : tempArray.reverse();
+    });
+
+
+
+    // 중간에 동일한 숫자가 잇으면 합치기, 맨 우측의 항목은 없애기
+
+    // 
+    return gridArray;
+}
 
 /**
  * 현재 배열에서 빈 항목을 찾아 숫자 부여해주는 함수
@@ -75,5 +160,6 @@ function setRandom(gridArray: GridRowModel[], emptyArray: Array<[number, number]
 
 export {
     isGameOverState,
-    findEmptyCells
+    findEmptyCells,
+    SwipeCells
 }

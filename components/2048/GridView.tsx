@@ -16,7 +16,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { GridCell } from '.';
 import { GridCellModel, GridRowModel } from '../../models';
 import { getRandomNumber } from '../../utils/NumberUtil';
-import { findEmptyCells } from './2048Rules';
+import { findEmptyCells, SwipeCells } from './2048Rules';
 import GestureRecognizer from 'react-native-swipe-gestures';
 
 const swipeDirections = {
@@ -88,13 +88,20 @@ const GridView: React.FC<IProps> = () => {
 				// swipeFn(rotateLeft(move(combine(move(rotateRight(boxData))))));
 				break;
 			case SWIPE_LEFT:
-				// 왼쪽으로 붙이기 -> 합치기 -> 왼쪽으로 붙이기
-				// swipeFn(move(combine(move(boxData))));
+				// 모든 항목을 왼쪽으로 붙이기
+
+				// 중간에 동일한 숫자가 잇으면 합치기, 맨 우측의 항목은 없애기
+
 				break;
 			case SWIPE_RIGHT:
 				// swipeFn(reverse2d(move(combine(move(reverse2d(boxData))))));
 				break;
 		}
+		console.log('Swipe : ', gestureName);
+		let tempArray = SwipeCells(gridArray, 'LEFT');
+
+		let newArray: Array<GridRowModel> = [...tempArray]; // []; //
+		setGrid(newArray);
 	};
 
 	return (
