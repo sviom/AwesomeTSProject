@@ -17,7 +17,7 @@ function SwipeCells(gridArray: GridRowModel[], direction: string): GridRowModel[
 
 
         if (completed_index == now_index) {
-            다음셀과합치기(array, now_index + 1, completed_index + 1);
+            // 다음셀과합치기(array, now_index + 1, completed_index + 1);
             return;
         }
 
@@ -58,6 +58,7 @@ function SwipeCells(gridArray: GridRowModel[], direction: string): GridRowModel[
     }
 
     // 2 2 0 0 
+    // 4 0 0 0 
 
 
     // 2 2 2 2   0
