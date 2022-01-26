@@ -12,7 +12,15 @@ class GridCell implements IGridCell {
     color: string = "red";
     x_axis: number = 0;
     y_axis: number = 0;
-    now_number: number = 0;
+
+    private _now_number: number = 0;
+    public get now_number(): number {
+        return this._now_number;
+    }
+    private set now_number(v: number) {
+        this._now_number = v;
+    }
+
 
     constructor() {
         this.id = Math.random().toString();
