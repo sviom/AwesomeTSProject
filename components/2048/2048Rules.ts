@@ -17,12 +17,12 @@ function SwipeCells(gridArray: GridRowModel[], direction: string): GridRowModel[
 
 
         if (completed_index == now_index) {
-            // 다음셀과합치기(array, now_index + 1, completed_index + 1);
+            // 다음셀과합치기(array, now_index, completed_index + 1);
             return;
         }
 
         if (now_index + 1 >= array.length) {
-            다음셀과합치기(array, 0, completed_index);
+            다음셀과합치기(array, completed_index, completed_index);
             return;
         }
 
