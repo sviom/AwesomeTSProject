@@ -19,13 +19,6 @@ import { getRandomNumber } from '../../utils/NumberUtil';
 import { findEmptyCells, SwipeCells } from './2048Rules';
 import GestureRecognizer from 'react-native-swipe-gestures';
 
-const swipeDirections = {
-	SWIPE_UP: 'SWIPE_UP',
-	SWIPE_DOWN: 'SWIPE_DOWN',
-	SWIPE_LEFT: 'SWIPE_LEFT',
-	SWIPE_RIGHT: 'SWIPE_RIGHT',
-};
-
 const styles = StyleSheet.create({
 	card: {
 		backgroundColor: 'white',
@@ -78,28 +71,8 @@ const GridView: React.FC<IProps> = () => {
 	};
 
 	const onSwipe = (gestureName: string, gestureState: PanResponderGestureState) => {
-		const { SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT } = swipeDirections;
-		switch (gestureName) {
-			case SWIPE_UP:
-				// 왼쪽으로 돌리기 -> 왼쪽으로 붙이기 -> 합치기 -> 왼쪽으로 붙이기 -> 오른쪽으로 돌리기
-				// swipeFn(rotateRight(move(combine(move(rotateLeft(boxData))))));
-				break;
-			case SWIPE_DOWN:
-				// swipeFn(rotateLeft(move(combine(move(rotateRight(boxData))))));
-				break;
-			case SWIPE_LEFT:
-				// 모든 항목을 왼쪽으로 붙이기
-
-				// 중간에 동일한 숫자가 잇으면 합치기, 맨 우측의 항목은 없애기
-
-				break;
-			case SWIPE_RIGHT:
-				// swipeFn(reverse2d(move(combine(move(reverse2d(boxData))))));
-				break;
-		}
 		console.log('Swipe : ', gestureName);
-		let tempArray = SwipeCells(gridArray, 'LEFT');
-
+		let tempArray = SwipeCells(gridArray, gestureName);
 		let newArray: Array<GridRowModel> = [...tempArray]; // []; //
 		setGrid(newArray);
 	};

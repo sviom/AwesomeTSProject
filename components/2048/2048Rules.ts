@@ -1,97 +1,92 @@
 import { GridRowModel, GridCellModel } from "../../models";
 import { getRandomNumber } from "../../utils/NumberUtil";
 
-function isGameOverState(gridArray: GridRowModel[]): boolean {
-    // 상하좌우에 똑같은 값이 없으면 ?
+const swipeDirections = {
+    SWIPE_UP: 'SWIPE_UP',
+    SWIPE_DOWN: 'SWIPE_DOWN',
+    SWIPE_LEFT: 'SWIPE_LEFT',
+    SWIPE_RIGHT: 'SWIPE_RIGHT',
+};
+
+const { SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT } = swipeDirections;
+
+function 다음셀과합치기(array: GridCellModel[], now_index: number = 0, completed_index: number = -1) {
+    console.log("값들 : ", now_index, completed_index);
 
 
-    return true;
-}
+    if (completed_index == now_index) {
+        // 다음셀과합치기(array, now_index, completed_index + 1);
+        return;
+    }
 
+    if (now_index + 1 >= array.length) {
+        다음셀과합치기(array, completed_index, completed_index);
+        return;
+    }
 
-
-function SwipeCells(gridArray: GridRowModel[], direction: string): GridRowModel[] {
-
-    function 다음셀과합치기(array: GridCellModel[], now_index: number = 0, completed_index: number = -1) {
-        console.log("값들 : ", now_index, completed_index);
-
-
-        if (completed_index == now_index) {
-            // 다음셀과합치기(array, now_index, completed_index + 1);
-            return;
-        }
-
-        if (now_index + 1 >= array.length) {
-            다음셀과합치기(array, completed_index, completed_index);
-            return;
-        }
-
-        if (completed_index > now_index) {
-            다음셀과합치기(array, now_index + 1, completed_index);
-            return;
-        }
-
-        if (completed_index + 1 == array.length)
-            return;
-
-
-        let nowCell: GridCellModel = array[now_index];
-        let nextCell: GridCellModel = array[now_index + 1];
-
-        if (nowCell.now_number == nextCell.now_number) {
-            nowCell.setNumber(nowCell.now_number + nextCell.now_number);
-            nextCell.setNumber(0);
-
-        } else {
-            if (nowCell.now_number == 0) {
-                nowCell.setNumber(nextCell.now_number);
-                nextCell.setNumber(0);
-            } else {
-                // completed_index = now_index;
-            }
-        }
-
-        completed_index = now_index;
-
+    if (completed_index > now_index) {
         다음셀과합치기(array, now_index + 1, completed_index);
         return;
     }
 
-    // 2 2 0 0 
-    // 4 0 0 0 
+    if (completed_index + 1 == array.length)
+        return;
 
 
-    // 2 2 2 2   0
-    // 4 0 2 2   1
-    // 4 2 0 2   2
-    // 4 2 2 0   3 
-    // 4 4 0 0   
+    let nowCell: GridCellModel = array[now_index];
+    let nextCell: GridCellModel = array[now_index + 1];
 
-    // 2 16 8 8 
-    // 2 16 16 0 
+    if (nowCell.now_number == nextCell.now_number) {
+        nowCell.setNumber(nowCell.now_number + nextCell.now_number);
+        nextCell.setNumber(0);
 
-    // 4 2 2 0 
-    // 4 4 0 0 
+    } else {
+        if (nowCell.now_number == 0) {
+            nowCell.setNumber(nextCell.now_number);
+            nextCell.setNumber(0);
+        } else {
+            // completed_index = now_index;
+        }
+    }
 
+    completed_index = now_index;
+
+    다음셀과합치기(array, now_index + 1, completed_index);
+    return;
+}
+
+function SwipeCells(gridArray: GridRowModel[], direction: string): GridRowModel[] {
     let tempArray: GridCellModel[] = [];
+    switch (direction) {
+        case SWIPE_UP:
+            // 왼쪽으로 돌리기 -> 왼쪽으로 붙이기 -> 합치기 -> 왼쪽으로 붙이기 -> 오른쪽으로 돌리기
+            // swipeFn(rotateRight(move(combine(move(rotateLeft(boxData))))));
+            break;
+        case SWIPE_DOWN:
+            // swipeFn(rotateLeft(move(combine(move(rotateRight(boxData))))));
+            break;
+        case SWIPE_LEFT:
+            // 모든 항목을 왼쪽으로 붙이기
 
+            // 중간에 동일한 숫자가 잇으면 합치기, 맨 우측의 항목은 없애기
 
-    // 모든 항목을 왼쪽으로 붙이기 
+            break;
+        case SWIPE_RIGHT:
+            // swipeFn(reverse2d(move(combine(move(reverse2d(boxData))))));
+            break;
+    }
+
+    // 모든 항목을 왼쪽으로 붙이기
+    // 위로/아래로/오른쪽으로 스와이프 하는 항목들은 각각 회전 시켜 왼쪽으로 붙이고 다시 반전 
     gridArray.forEach((row, row_index) => {
-        console.log("dd");
 
         // 방향에 따라 한쪽으로 반전 시켜 시작
-        tempArray = direction == "LEFT" ? row.GridCells : row.GridCells.reverse();
+        tempArray = direction == "RIGHT" ? row.GridCells : row.GridCells.reverse();
         다음셀과합치기(tempArray, 0, -1);
         // 결과 값 다시 반전 
-        tempArray = direction == "LEFT" ? tempArray : tempArray.reverse();
+        tempArray = direction == "RIGHT" ? tempArray : tempArray.reverse();
     });
 
-
-
-    // 중간에 동일한 숫자가 잇으면 합치기, 맨 우측의 항목은 없애기
-
-    // 
     return gridArray;
 }
 
@@ -158,6 +153,15 @@ function setRandom(gridArray: GridRowModel[], emptyArray: Array<[number, number]
     } while (endWhile);
     return gridArray;
 }
+
+
+function isGameOverState(gridArray: GridRowModel[]): boolean {
+    // 상하좌우에 똑같은 값이 없으면 ?
+
+
+    return true;
+}
+
 
 export {
     isGameOverState,
