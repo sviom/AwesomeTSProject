@@ -55,8 +55,7 @@ function 다음셀과합치기(array: GridCellModel[], now_index: number = 0, co
     return;
 }
 
-function SwipeCells(gridArray: GridRowModel[], direction: string): GridRowModel[] {
-    let tempArray: GridCellModel[] = [];
+function RotateArray(cellArray: GridCellModel[], direction: string): GridCellModel[] {
     switch (direction) {
         case SWIPE_UP:
             // 왼쪽으로 돌리기 -> 왼쪽으로 붙이기 -> 합치기 -> 왼쪽으로 붙이기 -> 오른쪽으로 돌리기
@@ -69,22 +68,29 @@ function SwipeCells(gridArray: GridRowModel[], direction: string): GridRowModel[
             // 모든 항목을 왼쪽으로 붙이기
 
             // 중간에 동일한 숫자가 잇으면 합치기, 맨 우측의 항목은 없애기
-
+            // 방향에 따라 한쪽으로 반전 시켜 시작
+            // gridArray =gridArray
             break;
         case SWIPE_RIGHT:
+            // 방향에 따라 한쪽으로 반전 시켜 시작
+            cellArray = cellArray.reverse();
             // swipeFn(reverse2d(move(combine(move(reverse2d(boxData))))));
             break;
     }
 
+    return cellArray;
+}
+
+function SwipeCells(gridArray: GridRowModel[], direction: string): GridRowModel[] {
+    let tempArray: GridCellModel[] = [];
+
     // 모든 항목을 왼쪽으로 붙이기
     // 위로/아래로/오른쪽으로 스와이프 하는 항목들은 각각 회전 시켜 왼쪽으로 붙이고 다시 반전 
     gridArray.forEach((row, row_index) => {
-
-        // 방향에 따라 한쪽으로 반전 시켜 시작
-        tempArray = direction == "RIGHT" ? row.GridCells : row.GridCells.reverse();
+        tempArray = RotateArray(row.GridCells, direction);
         다음셀과합치기(tempArray, 0, -1);
         // 결과 값 다시 반전 
-        tempArray = direction == "RIGHT" ? tempArray : tempArray.reverse();
+        tempArray = RotateArray(row.GridCells, direction);
     });
 
     return gridArray;
