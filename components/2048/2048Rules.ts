@@ -164,8 +164,45 @@ function setRandom(gridArray: GridRowModel[], emptyArray: Array<[number, number]
 function isGameOverState(gridArray: GridRowModel[]): boolean {
     // 상하좌우에 똑같은 값이 없으면 ?
 
+    let 결과목록: boolean[] = [];
+    gridArray.forEach((row, row_index) => {
+        row.GridCells.forEach((cell, column_index) => {
+            const 현재셀 = gridArray[row_index].GridCells[column_index];
+            let 결과: boolean = false;
 
-    return true;
+
+            // 위 아래 좌 우 
+            let 위인덱스 = row_index + 1;
+            let 아래인덱스 = row_index - 1;
+            let 옆인덱스 = column_index + 1;
+            let 왼쪽인덱스 = column_index - 1;
+
+            if (위인덱스 >= 0 && 위인덱스 != row_index) {
+                let 비교할셀 = gridArray[위인덱스].GridCells[column_index];
+                결과목록.push(현재셀.now_number == 비교할셀.now_number);
+            }
+
+
+            if (아래인덱스 >= 0 && 아래인덱스 != row_index) {
+                let 비교할셀 = gridArray[아래인덱스].GridCells[column_index];
+                결과목록.push(현재셀.now_number == 비교할셀.now_number);
+            }
+
+
+            if (옆인덱스 >= 0 && 옆인덱스 != column_index) {
+                let 비교할셀 = gridArray[row_index].GridCells[옆인덱스];
+                결과목록.push(현재셀.now_number == 비교할셀.now_number);
+            }
+
+
+            if (왼쪽인덱스 >= 0 && 왼쪽인덱스 != column_index) {
+                let 비교할셀 = gridArray[row_index].GridCells[왼쪽인덱스];
+                결과목록.push(현재셀.now_number == 비교할셀.now_number);
+            }
+        });
+    });
+
+    return 결과목록.includes(false);
 }
 
 
